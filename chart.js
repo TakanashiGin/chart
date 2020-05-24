@@ -129,20 +129,6 @@ tyrano.plugin.kag.tag.chart = {
             }
         }
         this.kag.ftag.nextOrder();
-    },
-
-
-    doEvent: function(id,val){
-        var mouseover = val.mouseover;
-        var mouseout = val.mouseout;
-        var click = val.click;
-        $(id).on('mouseover',function(){
-            if (mouseover) TYRANO.kag.embScript(mouseover);
-        }).on('mouseout',function(){
-            if (mouseout) TYRANO.kag.embScript(mouseout);
-        }).on('click',function(){
-            if (click) TYRANO.kag.embScript(click);
-        });
     }
 };
 
