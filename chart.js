@@ -1,6 +1,20 @@
 TYRANO.kag.stat.f.chart_information_for_each_square = [];
 
 
+tyrano.plugin.kag.chartEvent = function(id,val){
+    var mouseover = val.mouseover;
+    var mouseout = val.mouseout;
+    var click = val.click;
+    $(id).on('mouseover',function(){
+        if (mouseover) TYRANO.kag.embScript(mouseover);
+    }).on('mouseout',function(){
+        if (mouseout) TYRANO.kag.embScript(mouseout);
+    }).on('click',function(){
+        if (click) TYRANO.kag.embScript(click);
+    });
+}
+
+
 
 
 
@@ -66,7 +80,6 @@ tyrano.plugin.kag.tag.chart = {
 
 
         for (var i=0; i<div.ver; i++) {
-
             var line_name = 'line_' + i;
             var top = (div.height/div.ver)*i;
             var height = div.height/div.ver;
@@ -110,16 +123,12 @@ tyrano.plugin.kag.tag.chart = {
                             });
                         }
                         $(id).css('opacity',val.opacity);
-                        TYRANO.kag.tag.chart.doEvent(id,val);
+                        TYRANO.kag.chartEvent(id,val);
                     }
                 });
             }
         }
-
-
         this.kag.ftag.nextOrder();
-
-
     },
 
 
@@ -204,21 +213,9 @@ tyrano.plugin.kag.tag.make_chart = {
     start: function(pm){
         TYRANO.kag.stat.f.chart_information_for_each_square.forEach(function(val){
             var id = 'box_' + val.ver + '_' + val.side;
-            TYRANO.kag.tag.make_chart.doEvent(id,val);
+            TYRANO.kag.chartEvent(id,val);
         });
         this.kag.ftag.nextOrder();
-    },
-    doEvent: function(id,val){
-        var mouseover = val.mouseover;
-        var mouseout = val.mouseout;
-        var click = val.click;
-        $(id).on('mouseover',function(){
-            if (mouseover) TYRANO.kag.embScript(mouseover);
-        }).on('mouseout',function(){
-            if (mouseout) TYRANO.kag.embScript(mouseout);
-        }).on('click',function(){
-            if (click) TYRANO.kag.embScript(click);
-        });
     }
 };
 
